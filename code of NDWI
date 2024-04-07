@@ -1,5 +1,5 @@
 here is the code of NDWI mapof mmy upazilla-
-  print(table.first());
+ print(table.first());
 var upz = table.filter(ee.Filter.eq("NAME_3","Matlab"))
 print(upz);
 var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
@@ -10,5 +10,6 @@ var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
 print(s2);
 Map.addLayer(s2.clip(upz),{},"Matlab");
 var ndwi= s2.normalizedDifference(["B3","B8"]).rename("NDWI Image")
-print(s2);
-Map.addLayer(s2.clip(upz),{},"NDWI IMAGE")
+print(ndwi);
+Map.addLayer(ndwi.clip(upz),{},"NDWI IMAGE")
+
