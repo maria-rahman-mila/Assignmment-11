@@ -1,0 +1,19 @@
+here is the code 0f NDVI-
+  print(table.first());
+var upz= table.filter(ee.Filter.eq("NAME_3","Matlab"))
+print(upz);
+var landsat=ee.ImageCollection("LANDSAT/LC09/C02/T1_L2")
+.filterBounds(upz)
+.filterDate("2022-01-01","2022-12-31")
+.first()
+.select(["SR_B5","SR_B4","SR_B3","SR_B2"])
+print(landsat);
+Map.addLayer(landsat.clip(upz),{},"Matlab");
+var ndvi=landsat.normalizedDifference(["SR_B5","SR_B4"]).rename("NDVI IMAGE")
+print(ndvi);
+var vizparam ={
+  min: -1,
+  max: 1,
+  palette:["blue","cyan","green"]
+}
+Map.addLayer(ndvi.clip(upz),vizparam,"NDVI IMAGE")
